@@ -47,6 +47,78 @@
 			<input type="button" id="importBUTTON" value="Import"/>
 		</div>
 		<script>
+			// Variables
+				// Buttons
+					var addBUTTON    = document.getElementById("addBUTTON")
+					var downBUTTON   = document.getElementById("downBUTTON")
+					var exportBUTTON = document.getElementById("exportBUTTON")
+					var importBUTTON = document.getElementById("importBUTTON")
+					var removeBUTTON = document.getElementById("removeBUTTON")
+					var upBUTTON     = document.getElementById("upBUTTON")
+				// Divs
+					var buttons1DIV = document.getElementById("buttons1DIV")
+					var buttons2DIV = document.getElementById("buttons2DIV")
+					var chunkDIV    = document.getElementById("chunkDIV")
+					var headerDIV   = document.getElementById("headerDIV")
+					var optionsDIV  = document.getElementById("optionsDIV")
+					var outputDIV   = document.getElementById("outputDIV")
+					var replacerDIV = document.getElementById("replacerDIV")
+					var templateDIV = document.getElementById("templateDIV")
+				// Labels
+					var chunkLABEL    = document.getElementById("chunkLABEL")
+					var headerLABEL   = document.getElementById("headerLABEL")
+					var outputLABEL   = document.getElementById("outputLABEL")
+					var templateLABEL = document.getElementById("templateLABEL")
+				// Other Elements
+					var chunkSELECT    = document.getElementById("chunkSELECT")
+					var outputTABLE    = document.getElementById("outputTABLE")
+					var templateSELECT = document.getElementById("templateSELECT")
+				
+				
+					
+			// Functions
+			function Add(){
+				console.log("Add")
+			}
+			
+			function BuildTable(){
+				console.log("Build Table")
+			}
+			
+			function Down(){
+				console.log("Down")
+			}
+			
+			function Export(){
+				console.log("Export")
+			}
+			
+			function Import(){
+				console.log("Import")
+			}
+			
+			function Remove(){
+				console.log("Remove")
+			}
+			
+			function Up(){
+				console.log("Up")
+			}
+			
+			function Init(){
+				// This will run immediately upon the page loading to populate the page
+				console.log("Init")
+				addBUTTON.onclick = function(){ Add(); BuildTable(); }
+				downBUTTON.onclick = function(){ Down(); BuildTable(); }
+				exportBUTTON.onclick = function(){ Export(); }
+				importBUTTON.onclick = function(){ Import(); }
+				removeBUTTON.onclick = function(){ Remove(); BuildTable(); }
+				upBUTTON.onclick = function(){ Up(); BuildTable(); }
+			}
+			
+			// Main
+			Init()
+			
 		</script>
 	</body>
 </html>
