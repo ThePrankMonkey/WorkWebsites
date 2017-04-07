@@ -4,48 +4,102 @@
 			Test Plan Builder
 		</title>
 		<style>
-			 .description{
-				
-			 }
+			div{
+				<!-- border: 1px solid black; -->
+			}
+			.description{
+				color: black;
+			}
+			#headerDIV{
+				color: black;
+			}
+			#templateDIV{
+				width: 30%;
+			}
+			#buttons1DIV{
+				width: 20%;
+			}
+			#chunkDIV{
+				width: 50%;
+				position: relative;
+				top: 0px;
+			}
 		</style>
 	</head>
 	<body>
 		<div id="headerDIV">
-			<label id="headerLABEL"></label>
+			<label id="headerLABEL">
+				Test Plan Builder v0.1
+			</label>
 		</div>
-		<div id="templateDIV">
-			<label id="templateLABEL" class="description"></label>
-			<br>
-			<select id="templateSELECT"></select>
-		</div>
-		<div id="buttons1DIV">
-			<input type="button" id="addBUTTON"    value="Add"/>
-			<br>
-			<input type="button" id="removeBUTTON" value="Remove"/>
-			<br>
-			<input type="button" id="upBUTTON"     value="Up"/>
-			<br>
-			<input type="button" id="downBUTTON"   value="Down"/>
-		</div>
-		<div id="chunkDIV">
-			<label id="chunkLABEL" class="description"></label>
-			<br>
-			<select id="chunkSELECT"></select>
-		</div>
-		<div id="optionsDIV">
-		</div>
-		<div id="outputDIV">
-			<label id="outputLABEL" class="description"></label>
-			<br>
-			<table id="outputTABLE"></table>
-		</div>
-		<div id="replacerDIV">
-		</div>
-		<div id="buttons2DIV">
-			<input type="button" id="exportBUTTON" value="Export"/>
-			<br>
-			<input type="button" id="importBUTTON" value="Import"/>
-		</div>
+		<table id="topTABLE">
+			<tr>
+				<td id="templateCELL">
+					<div id="templateDIV">
+						<label id="templateLABEL" class="description">
+							Process Here
+						</label>
+						<br>
+						<select id="templateSELECT"></select>
+					</div>
+				</td>
+				<td id="buttons1CELL">
+					<div id="buttons1DIV">
+						<input type="button" id="addBUTTON"    value="Add"/>
+						<br>
+						<input type="button" id="removeBUTTON" value="Remove"/>
+						<br>
+						<input type="button" id="upBUTTON"     value="Up"/>
+						<br>
+						<input type="button" id="downBUTTON"   value="Down"/>
+					</div>
+				</td>
+				<td id="chunkCELL">
+					<div id="chunkDIV">
+						<label id="chunkLABEL" class="description">
+							Select from Here
+						</label>
+						<br>
+						<select id="chunkSELECT"></select>
+					</div>
+					<div id="optionsDIV">
+					</div>
+				</td>
+			</tr>
+		</table>
+		<table id="bottomTABLE">
+			<tr>
+				<td>
+					<div id="outputDIV">
+						<label id="outputLABEL" class="description">
+							Find the created table below
+						</label>
+						<br>
+						<table id="outputTABLE"></table>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label id="replacerLABEL">
+						These are the used variables
+					</label>
+					<br>
+					<div id="replacerDIV">
+					</div>
+				</td>
+				<td>
+					<div id="buttons2DIV">
+						<input type="button" id="exportBUTTON" value="Export"/>
+						<br>
+						<input type="button" id="importBUTTON" value="Import"/>
+					</div>
+				</td>
+			</tr>
+		</table>
+		<script type="text/javascript" src="TestPlans.json">
+			console.log(data)
+		</script>
 		<script>
 			// Variables
 				// Buttons
@@ -73,12 +127,19 @@
 					var chunkSELECT    = document.getElementById("chunkSELECT")
 					var outputTABLE    = document.getElementById("outputTABLE")
 					var templateSELECT = document.getElementById("templateSELECT")
-				
-				
-					
+						templateSELECT.multiple = true
+			
+			
+			
 			// Functions
 			function Add(){
 				console.log("Add")
+				var tempOption = document.createElement("option")
+					tempOption.value = chunkSELECT.value
+					tempOption.innerHTML = chunkSELECT.value
+					tempOption.label = GetOptions()
+				templateSELECT.appendChild(tempOption)
+				templateSELECT.size = templateSELECT.childNodes.length
 			}
 			
 			function BuildTable(){
@@ -91,33 +152,181 @@
 			
 			function Export(){
 				console.log("Export")
+				// http://stackoverflow.com/questions/8178825/create-text-file-in-javascript
+				var textFile = null
+				var outputContent = JSON.stringify(data)
+				makeTextFile = function (text) {
+					var blob = new Blob([text], {type: 'text/plain'});
+					// If we are replacing a previously generated file we need to
+					// manually revoke the object URL to avoid memory leaks.
+					if (textFile !== null) {
+						window.URL.revokeObjectURL(textFile);
+					}
+					textFile = window.URL.createObjectURL(blob);
+					return textFile;
+				};
+				var link = document.createElement("a");
+				link.href = makeTextFile(outputContent);
+				link.download = "Export Data " + (new Date).toISOString() + ".txt"
+				link.click()
 			}
 			
 			function Import(){
 				console.log("Import")
+				/*
+				var input = document.createElement("input")
+					input.type = "file"
+					input.click()
+					console.log(input.value)
+				*/
+				var inputDiv = document.createElement("div")
+					inputDiv.style = "position: fixed; top: 5%; left: 15%; width: 500px; border: 3px solid #73AD21;"
+				var inputBox = document.createElement("textarea")
+					inputBox.style = "width: 100%"
+					inputBox.rows = 40
+				var inputYes = document.createElement("input")
+					inputYes.type = "button"
+					inputYes.value = "Yes"
+					inputYes.onclick = function(){
+						console.log("Yes")
+						inputDiv.parentNode.removeChild(inputDiv)
+					}
+				var inputNo = document.createElement("input")
+					inputNo.type = "button"
+					inputNo.value = "No"
+					inputNo.onclick = function(){
+						console.log("No")
+						inputDiv.parentNode.removeChild(inputDiv)
+					}
+				document.body.appendChild(inputDiv)
+				inputDiv.appendChild(inputBox)
+				inputDiv.appendChild(document.createElement("br"))
+				inputDiv.appendChild(inputYes)
+				inputDiv.appendChild(inputNo)
+			}
+			
+			function GetOptions(){
+				console.log("Adding label")
+				var labelText = ""
+				for (var i=0; i<optionsDIV.childNodes.length; i++){
+					labelText += optionsDIV.childNodes[i].childNodes[0].type
+				}
 			}
 			
 			function Remove(){
 				console.log("Remove")
+				var targetOption = []
+				for (var i=0; i<templateSELECT.childNodes.length; i++){
+					if (templateSELECT.childNodes[i].selected){
+						targetOption.push(templateSELECT.childNodes[i])
+					}
+				}
+				for (var i=0; i<targetOption.length; i++){
+					templateSELECT.removeChild(targetOption[i])
+					templateSELECT.size = templateSELECT.childNodes.length
+				}
 			}
 			
 			function Up(){
 				console.log("Up")
 			}
 			
-			function Init(){
-				// This will run immediately upon the page loading to populate the page
-				console.log("Init")
-				addBUTTON.onclick = function(){ Add(); BuildTable(); }
-				downBUTTON.onclick = function(){ Down(); BuildTable(); }
-				exportBUTTON.onclick = function(){ Export(); }
-				importBUTTON.onclick = function(){ Import(); }
-				removeBUTTON.onclick = function(){ Remove(); BuildTable(); }
-				upBUTTON.onclick = function(){ Up(); BuildTable(); }
+			function UpdateOptions(id){
+				console.log("Update for", id)
+				// clear all Options elememts
+				while (optionsDIV.hasChildNodes()) {
+					optionsDIV.removeChild(optionsDIV.lastChild);
+				}
+				
+				// find data for option
+				for (var i=0; i<data.length; i++){
+					if (data[i].ID == id){
+						for(var j=0; j<data[i].Options.length; j++){
+							switch(data[i].Options[j].Type){
+								case "Checkbox":
+									console.log("Building Checkbox")
+									var tempDiv = document.createElement("div")
+									optionsDIV.appendChild(tempDiv)
+									var tempElm1 = document.createElement("input")
+										tempElm1.type = "checkbox"
+										tempElm1.class = "firstElm"
+									tempDiv.appendChild(tempElm1)
+									var tempElm2 = document.createElement("span")
+										tempElm2.innerHTML = data[i].Options[j].Text
+										tempElm2.class = "secondElm"
+									tempDiv.appendChild(tempElm2)
+									break;
+								case "Variable":
+									console.log("Building Variable")
+									var tempDiv = document.createElement("div")
+									optionsDIV.appendChild(tempDiv)
+									var tempElm1 = document.createElement("span")
+										tempElm1.innerHTML = "{{" + data[i].Options[j].Var + "}}"
+										tempElm1.class = "firstElm"
+									tempDiv.appendChild(tempElm1)
+									var tempElm1 = document.createElement("input")
+										tempElm2.type = "text"
+										tempElm2.class = "secondElm"
+									tempDiv.appendChild(tempElm2)
+									var tempElm3 = document.createElement("span")
+										tempElm3.innerHTML = data[i].Options[j].Text
+										tempElm3.class = "thirdElm"
+									tempDiv.appendChild(tempElm3)
+									break;
+								default:
+									console.log("Problem")
+									optionsDIV.innerHTML += "<br>Something wrong with ", data[i].Name, "Options", j,"<br>"
+									break;
+							}
+						}
+					}
+				}
 			}
 			
+			function Init(){
+				// This will run immediately upon the page loading to populate the page
+					console.log("Init")
+				
+				// Reorganize order of Chunks
+					// http://stackoverflow.com/questions/1069666/sorting-javascript-object-by-property-value
+					var byTitle = data.slice(0);
+					byTitle.sort(function(a,b) {
+						var x = a.Title.toLowerCase();
+						var y = b.Title.toLowerCase();
+						return x < y ? -1 : x > y ? 1 : 0;
+					});
+					data = byTitle
+				
+				// Populate Chunks
+					for (var i=0; i<data.length; i++){
+						console.log("Adding", data[i].Title)
+						//chunkSELECT
+						var tempOption = document.createElement("option")
+							tempOption.value = data[i].ID
+							tempOption.id = data[i].ID
+							tempOption.innerHTML = data[i].Title
+						chunkSELECT.appendChild(tempOption)
+					}
+					chunkSELECT.size = chunkSELECT.childNodes.length
+				
+				// Create listener for Chunks
+					chunkSELECT.addEventListener("change", function(){
+						UpdateOptions(this.value)
+					})
+				
+				// Assign Functions to Buttons
+					addBUTTON.onclick    = function(){ Add();    BuildTable(); }
+					downBUTTON.onclick   = function(){ Down();   BuildTable(); }
+					exportBUTTON.onclick = function(){ Export(); }
+					importBUTTON.onclick = function(){ Import(); }
+					removeBUTTON.onclick = function(){ Remove(); BuildTable(); }
+					upBUTTON.onclick     = function(){ Up();     BuildTable(); }
+			}
+			
+			
+			
 			// Main
-			Init()
+				Init()
 			
 		</script>
 	</body>
