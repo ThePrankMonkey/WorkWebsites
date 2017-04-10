@@ -171,46 +171,35 @@
 				link.click()
 			}
 			
-			function Import(){
-				console.log("Import")
-				/*
-				var input = document.createElement("input")
-					input.type = "file"
-					input.click()
-					console.log(input.value)
-				*/
-				var inputDiv = document.createElement("div")
-					inputDiv.style = "position: fixed; top: 5%; left: 15%; width: 500px; border: 3px solid #73AD21;"
-				var inputBox = document.createElement("textarea")
-					inputBox.style = "width: 100%"
-					inputBox.rows = 40
-				var inputYes = document.createElement("input")
-					inputYes.type = "button"
-					inputYes.value = "Yes"
-					inputYes.onclick = function(){
-						console.log("Yes")
-						inputDiv.parentNode.removeChild(inputDiv)
-					}
-				var inputNo = document.createElement("input")
-					inputNo.type = "button"
-					inputNo.value = "No"
-					inputNo.onclick = function(){
-						console.log("No")
-						inputDiv.parentNode.removeChild(inputDiv)
-					}
-				document.body.appendChild(inputDiv)
-				inputDiv.appendChild(inputBox)
-				inputDiv.appendChild(document.createElement("br"))
-				inputDiv.appendChild(inputYes)
-				inputDiv.appendChild(inputNo)
-			}
-			
 			function GetOptions(){
 				console.log("Adding label")
 				var labelText = ""
 				for (var i=0; i<optionsDIV.childNodes.length; i++){
 					labelText += optionsDIV.childNodes[i].childNodes[0].type
 				}
+			}
+			
+			function Import(){
+				console.log("Import")
+				var input = document.createElement("input")
+					input.id = "fileInput"
+					input.type = "file"
+					input.accept = ".txt"
+					input.style = "display: none;"
+					input.onchange = function(){
+						console.log(document.getElementById("fileInput"))
+						console.log(document.getElementById("fileInput").value)
+						var file = document.getElementById("fileInput").files[0]
+						console.log(file)
+						var reader = new FileReader()
+							reader.onload = function(e){
+								console.log(e.target.result)
+								input.parentNode.removeChild(input)
+							}
+							reader.readAsText(file)
+					}
+				document.body.appendChild(input)
+				input.click()
 			}
 			
 			function Remove(){
@@ -331,3 +320,4 @@
 		</script>
 	</body>
 </html>
+
