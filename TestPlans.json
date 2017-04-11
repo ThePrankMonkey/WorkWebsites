@@ -1,0 +1,39 @@
+data = [
+	{
+		"ID" : "IEOption",
+		"Title" : "Internet Explorer",
+		"Steps" : [
+			{	"Actual"   : "Look for Internet Explorer.",
+				"Expected" : "Internet Explorer is found."},
+			{	"Actual"   : "Step Two.",
+				"Expected" : "Step two completed."}
+		],
+		"Options" : [
+			{	"ID"    : "IEOption-1",
+				"Type"  : "checkbox",
+				"Text"  : "IE Test Text",
+				"Value" : ""}
+		]
+	},
+	{
+		"ID" : "ADOption",
+		"Title" : "Active Directory",
+		"Steps" : [
+			{	"Actual"   : "Step One.",
+				"Expected" : "Done."},
+			{	"Actual"   : "Step Two.",
+				"Expected" : "Checked {{Var1}}."}
+		],
+		"Options" : [
+			{	"ID"    : "ADOption-1",
+				"Type"  : "checkbox",
+				"Text"  : "AD Checkbox Test",
+				"Value" : ""},
+			{	"ID"    : "ADOption-2",
+				"Type"  : "text",
+				"Text"  : "AD Text Test",
+				"Var"   : "Var1",
+				"Value" : ""}
+		]
+	}
+];
