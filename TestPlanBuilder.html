@@ -171,15 +171,15 @@
 						tempJSON = JSON.parse(JSON.stringify(data[i]))
 					}
 				}
-				for (var i=0; i<tempJSON.Options.length; i++){
-					var optionElem = document.getElementById(tempJSON.Options[i].ID)
+				for (var i=0; i<tempJSON.Settings.length; i++){
+					var optionElem = document.getElementById(tempJSON.Settings[i].ID)
 					if (optionElem.tagName == "INPUT"){
 						switch(optionElem.type){
 							case "checkbox":
-								tempJSON.Options[i].Value = optionElem.checked
+								tempJSON.Settings[i].Value = optionElem.checked
 								break;
 							case "text":
-								tempJSON.Options[i].Value = optionElem.value
+								tempJSON.Settings[i].Value = optionElem.value
 								break;
 							default:
 								console.log("Unrecorded type in ADD-Add item to currentJSON")
@@ -187,7 +187,7 @@
 						}
 					}
 					else if (optionElem.tagName == "SELECT"){
-						tempJSON.Options[i].Value = optionElem.value
+						tempJSON.Settings[i].Value = optionElem.value
 					} 
 					else{
 						console.log("Unrecorded type in ADD-Add item to currentJSON")
@@ -352,19 +352,19 @@
 				// find data for option
 				for (var i=0; i<data.length; i++){
 					if (data[i].ID == id){
-						for(var j=0; j<data[i].Options.length; j++){
-							switch(data[i].Options[j].Type){
+						for(var j=0; j<data[i].Settings.length; j++){
+							switch(data[i].Settings[j].Type){
 								case "checkbox":
 									console.log("Building Checkbox")
 									var tempCheckDiv = document.createElement("div")
 										tempCheckDiv.ID = "checkboxDIV"
 									var tempCheckElm1 = document.createElement("input")
-										tempCheckElm1.id = data[i].Options[j].ID
-										tempCheckElm1.type = data[i].Options[j].Type
+										tempCheckElm1.id = data[i].Settings[j].ID
+										tempCheckElm1.type = data[i].Settings[j].Type
 										tempCheckElm1.class = "firstElm"
 									tempCheckDiv.appendChild(tempCheckElm1)
 									var tempCheckElm2 = document.createElement("span")
-										tempCheckElm2.innerHTML = data[i].Options[j].Text
+										tempCheckElm2.innerHTML = data[i].Settings[j].Text
 										tempCheckElm2.class = "secondElm"
 									tempCheckDiv.appendChild(tempCheckElm2)
 									optionsDIV.appendChild(tempCheckDiv)
@@ -374,17 +374,17 @@
 									var tempSelectDiv = document.createElement("div")
 										tempSelectDiv.ID = "textDIV"
 									var tempSelectElm1 = document.createElement("span")
-										tempSelectElm1.innerHTML = data[i].Options[j].Text
+										tempSelectElm1.innerHTML = data[i].Settings[j].Text
 										tempSelectElm1.class = "firstElm"
 									tempSelectDiv.appendChild(tempSelectElm1)
 									var tempSelectElm2 = document.createElement("select")
-										tempSelectElm2.id = data[i].Options[j].ID
-										tempSelectElm2.type = data[i].Options[j].Type
+										tempSelectElm2.id = data[i].Settings[j].ID
+										tempSelectElm2.type = data[i].Settings[j].Type
 										tempSelectElm2.class = "secondElm"
-										for (var k=0; k<data[i].Options[j].Options.length; k++){
+										for (var k=0; k<data[i].Settings[j].Options.length; k++){
 											var tempOption = document.createElement("option")
-												tempOption.value = data[i].Options[j].Options[k]
-												tempOption.innerHTML = data[i].Options[j].Options[k]
+												tempOption.value = data[i].Settings[j].Options[k]
+												tempOption.innerHTML = data[i].Settings[j].Options[k]
 											tempSelectElm2.appendChild(tempOption)
 										}
 									tempSelectDiv.appendChild(tempSelectElm2)
@@ -395,23 +395,23 @@
 									var tempTextDiv = document.createElement("div")
 										tempTextDiv.ID = "textDIV"
 									var tempTextElm1 = document.createElement("span")
-										tempTextElm1.innerHTML = "{{" + data[i].Options[j].Var + "}}"
+										tempTextElm1.innerHTML = "{{" + data[i].Settings[j].Var + "}}"
 										tempTextElm1.class = "firstElm"
 									tempTextDiv.appendChild(tempTextElm1)
 									var tempTextElm2 = document.createElement("input")
-										tempTextElm2.id = data[i].Options[j].ID
-										tempTextElm2.type = data[i].Options[j].Type
+										tempTextElm2.id = data[i].Settings[j].ID
+										tempTextElm2.type = data[i].Settings[j].Type
 										tempTextElm2.class = "secondElm"
 									tempTextDiv.appendChild(tempTextElm2)
 									var tempTextElm3 = document.createElement("span")
-										tempTextElm3.innerHTML = data[i].Options[j].Text
+										tempTextElm3.innerHTML = data[i].Settings[j].Text
 										tempTextElm3.class = "thirdElm"
 									tempTextDiv.appendChild(tempTextElm3)
 									optionsDIV.appendChild(tempTextDiv)
 									break
 								default:
 									console.log("Problem")
-									optionsDIV.innerHTML += "<br>Something wrong with ", data[i].Name, "Options", j,"<br>"
+									optionsDIV.innerHTML += "<br>Something wrong with ", data[i].Name, "Settings", j,"<br>"
 									break;
 							}
 						}
