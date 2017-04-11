@@ -7,11 +7,28 @@
 			div{
 				<!-- border: 1px solid black; -->
 			}
+			th{
+				text-align: center;
+				font-size: 1.125em;
+				font-weight: bold;
+			}
+			tr{
+				font-size: 0.750em;
+			}
 			.description{
 				color: black;
 			}
 			#headerDIV{
 				color: black;
+			}
+			.headRow > th{
+				border: 4px solid black;
+			}
+			.stepRow > td{
+				border: 2px solid black;
+			}
+			#outputTABLE{
+				border-collapse: collapse;
 			}
 			#templateDIV{
 				width: 30%;
@@ -170,6 +187,45 @@
 			
 			function BuildTable(){
 				console.log("Build Table")
+				// Clear Table
+				outputTABLE.innerHTML = ""
+				/*
+				for (var i=outputTABLE.childNodes.length; i>=0; i--){
+					outputTABLE.removeChild(outputTABLE[i])
+				}
+				*/
+				// Build header
+				var headRow = document.createElement("tr")
+					headRow.className = "headRow"
+				outputTABLE.appendChild(headRow)
+				var headStep = document.createElement("th")
+					headStep.innerHTML = "Step"
+					headRow.appendChild(headStep)
+				var headActual = document.createElement("th")
+					headActual.innerHTML = "Actual Step"
+					headRow.appendChild(headActual)
+				var headExpected = document.createElement("th")
+					headExpected.innerHTML = "Expected Results"
+					headRow.appendChild(headExpected)
+				// Build rows
+				var step = 1
+				for (var i=0; i<currentJSON.length; i++){
+					for (var j=0; j<currentJSON[i].Steps.length; j++){
+						var newRow = document.createElement("tr")
+							newRow.className = "stepRow"
+						outputTABLE.appendChild(newRow)
+						var stepStep = document.createElement("td")
+							stepStep.innerHTML = step + "."
+							newRow.appendChild(stepStep)
+						var actualStep = document.createElement("td")
+							actualStep.innerHTML = currentJSON[i].Steps[j].Actual
+							newRow.appendChild(actualStep)
+						var expectedStep = document.createElement("td")
+							expectedStep.innerHTML = currentJSON[i].Steps[j].Expected
+							newRow.appendChild(expectedStep)
+						step++
+					}
+				}
 			}
 			
 			function Down(){
@@ -180,7 +236,7 @@
 				console.log("Export")
 				// http://stackoverflow.com/questions/8178825/create-text-file-in-javascript
 				var textFile = null
-				var outputContent = JSON.stringify(data)
+				var outputContent = JSON.stringify(currentJSON)
 				makeTextFile = function (text) {
 					var blob = new Blob([text], {type: 'text/plain'});
 					// If we are replacing a previously generated file we need to
@@ -220,6 +276,7 @@
 						var reader = new FileReader()
 							reader.onload = function(e){
 								console.log(e.target.result)
+								currentJSON = JSON.parse(e.target.result)
 								input.parentNode.removeChild(input)
 							}
 							reader.readAsText(file)
