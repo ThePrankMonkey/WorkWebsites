@@ -8,11 +8,16 @@ data = [
 			{	"Actual"   : "Step Two.",
 				"Expected" : "Step two completed."}
 		],
-		"Options" : [
-			{	"ID"    : "IEOption-1",
-				"Type"  : "checkbox",
-				"Text"  : "IE Test Text",
-				"Value" : ""}
+		"Settings" : [
+			{	"ID"      : "IEOption-1",
+				"Type"    : "checkbox",
+				"Text"    : "IE Test Text",
+				"Value"   : ""},
+			{	"ID"      : "IEOption-2",
+				"Type"    : "select",
+				"Options" : ["Computer", "User", "Group"],
+				"Text"    : "IE Test Text",
+				"Value"   : ""}
 		]
 	},
 	{
@@ -22,9 +27,9 @@ data = [
 			{	"Actual"   : "Step One.",
 				"Expected" : "Done."},
 			{	"Actual"   : "Step Two.",
-				"Expected" : "Checked {{Var1}}."}
+				"Expected" : "Checked <span class=variable>{{Var1}}</span>."}
 		],
-		"Options" : [
+		"Settings" : [
 			{	"ID"    : "ADOption-1",
 				"Type"  : "checkbox",
 				"Text"  : "AD Checkbox Test",
