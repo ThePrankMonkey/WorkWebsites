@@ -188,12 +188,9 @@
 			function BuildTable(){
 				console.log("Build Table")
 				// Clear Table
-				outputTABLE.innerHTML = ""
-				/*
-				for (var i=outputTABLE.childNodes.length; i>=0; i--){
-					outputTABLE.removeChild(outputTABLE[i])
+				while (outputTABLE.hasChildNodes()) {
+					outputTABLE.removeChild(outputTABLE.lastChild);
 				}
-				*/
 				// Build header
 				var headRow = document.createElement("tr")
 					headRow.className = "headRow"
@@ -278,11 +275,30 @@
 								console.log(e.target.result)
 								currentJSON = JSON.parse(e.target.result)
 								input.parentNode.removeChild(input)
+								RebuildTemplateSelect()
+								BuildTable()
 							}
 							reader.readAsText(file)
 					}
 				document.body.appendChild(input)
 				input.click()
+			}
+			
+			function RebuildTemplateSelect(){
+				console.log("Rebuild")
+				// Clear templateSELECT
+				while (templateSELECT.hasChildNodes()) {
+					templateSELECT.removeChild(templateSELECT.lastChild);
+				}
+				// Add options
+				for (var i=0; i<currentJSON.length; i++){
+					var tempOption = document.createElement("option")
+						tempOption.value = currentJSON[i].ID
+						tempOption.id = currentJSON[i].ID
+						tempOption.innerHTML = currentJSON[i].ID
+					templateSELECT.appendChild(tempOption)
+				}
+				templateSELECT.size = templateSELECT.childNodes.length
 			}
 			
 			function Remove(){
