@@ -27,6 +27,10 @@
 			.stepRow > td{
 				border: 2px solid black;
 			}
+			.variable{
+				font-weight: bold;
+				color: red;
+			}
 			#outputTABLE{
 				border-collapse: collapse;
 			}
@@ -169,16 +173,24 @@
 				}
 				for (var i=0; i<tempJSON.Options.length; i++){
 					var optionElem = document.getElementById(tempJSON.Options[i].ID)
-					switch(optionElem.type){
-						case "checkbox":
-							tempJSON.Options[i].Value = optionElem.checked
-							break;
-						case "text":
-							tempJSON.Options[i].Value = optionElem.value
-							break;
-						default:
-							console.log("Unrecorded type in ADD-Add item to currentJSON")
-							break;
+					if (optionElem.tagName == "INPUT"){
+						switch(optionElem.type){
+							case "checkbox":
+								tempJSON.Options[i].Value = optionElem.checked
+								break;
+							case "text":
+								tempJSON.Options[i].Value = optionElem.value
+								break;
+							default:
+								console.log("Unrecorded type in ADD-Add item to currentJSON")
+								break;
+						}
+					}
+					else if (optionElem.tagName == "SELECT"){
+						tempJSON.Options[i].Value = optionElem.value
+					} 
+					else{
+						console.log("Unrecorded type in ADD-Add item to currentJSON")
 					}
 				}
 				tempJSON.ID = uniqueID
@@ -356,9 +368,30 @@
 										tempCheckElm2.class = "secondElm"
 									tempCheckDiv.appendChild(tempCheckElm2)
 									optionsDIV.appendChild(tempCheckDiv)
-									break;
+									break
+								case "select":
+									console.log("Building Select")
+									var tempSelectDiv = document.createElement("div")
+										tempSelectDiv.ID = "textDIV"
+									var tempSelectElm1 = document.createElement("span")
+										tempSelectElm1.innerHTML = data[i].Options[j].Text
+										tempSelectElm1.class = "firstElm"
+									tempSelectDiv.appendChild(tempSelectElm1)
+									var tempSelectElm2 = document.createElement("select")
+										tempSelectElm2.id = data[i].Options[j].ID
+										tempSelectElm2.type = data[i].Options[j].Type
+										tempSelectElm2.class = "secondElm"
+										for (var k=0; k<data[i].Options[j].Options.length; k++){
+											var tempOption = document.createElement("option")
+												tempOption.value = data[i].Options[j].Options[k]
+												tempOption.innerHTML = data[i].Options[j].Options[k]
+											tempSelectElm2.appendChild(tempOption)
+										}
+									tempSelectDiv.appendChild(tempSelectElm2)
+									optionsDIV.appendChild(tempSelectDiv)
+									break
 								case "text":
-									console.log("Building Variable")
+									console.log("Building Text")
 									var tempTextDiv = document.createElement("div")
 										tempTextDiv.ID = "textDIV"
 									var tempTextElm1 = document.createElement("span")
@@ -375,7 +408,7 @@
 										tempTextElm3.class = "thirdElm"
 									tempTextDiv.appendChild(tempTextElm3)
 									optionsDIV.appendChild(tempTextDiv)
-									break;
+									break
 								default:
 									console.log("Problem")
 									optionsDIV.innerHTML += "<br>Something wrong with ", data[i].Name, "Options", j,"<br>"
