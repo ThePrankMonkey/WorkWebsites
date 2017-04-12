@@ -3,9 +3,9 @@ data = [
 		"ID" : "IEOption",
 		"Title" : "Internet Explorer",
 		"Steps" : [
-			{	"Actual"   : "Look for Internet Explorer.",
+			{	"TestStep" : "Look for Internet Explorer.",
 				"Expected" : "Internet Explorer is found."},
-			{	"Actual"   : "Step Two.",
+			{	"TestStep" : "Step Two.",
 				"Expected" : "Step two completed."}
 		],
 		"Settings" : [
@@ -24,9 +24,9 @@ data = [
 		"ID" : "ADOption",
 		"Title" : "Active Directory",
 		"Steps" : [
-			{	"Actual"   : "Step One.",
+			{	"TestStep" : "Step One.",
 				"Expected" : "Done."},
-			{	"Actual"   : "Step Two.",
+			{	"TestStep" : "Step Two.",
 				"Expected" : "Checked <span class=variable>{{Var1}}</span>."}
 		],
 		"Settings" : [
@@ -39,6 +39,53 @@ data = [
 				"Text"  : "AD Text Test",
 				"Var"   : "Var1",
 				"Value" : ""}
+		]
+	},
+	{
+		"ID" : "OpenAD",
+		"Title" : "Opening Active Directory",
+		"Steps" : [
+			{	"TestStep" : "Press Windows key on your keyboard",
+				"Expected" : "Start menu opens."},
+			{	"TestStep" : "In search bar, type \"mmc.exe\".",
+				"Expected" : "\"mmc.exe\" test is entered."},
+			{	"TestStep" : "In results, right-click on mmc.exe.",
+				"Expected" : "Context Menu is opened."},
+			{	"TestStep" : "Left-click on Run as Administrator.",
+				"Expected" : "Credential Logon window is opened."},
+			{	"TestStep" : "Left-click on the user name field.",
+				"Expected" : "User name field has focus."},
+			{	"TestStep" : "Enter your domain and the username for your admin account in the user name field in the following format: \"Domain\UserName\".",
+				"Expected" : "Admin domain and user name are entered."},
+			{	"TestStep" : "Left-click on the password field.",
+				"Expected" : "User password field has focus."},
+			{	"TestStep" : "Enter your admin password into the password field.",
+				"Expected" : "Admin password is entered."},
+			{	"TestStep" : "Left-click on Yes.",
+				"Expected" : "MMC Console window is opened."},
+			{	"TestStep" : "Left-click on File.",
+				"Expected" : "File context menu opens."},
+			{	"TestStep" : "Left-click on Add/Remove Snap In.",
+				"Expected" : "Snap In window opens."},
+			{	"TestStep" : "Under Available Snap-Ins, select Active Directory Users and Computers.",
+				"Expected" : "Active Directory Users and Computers is highlighted."},
+			{	"TestStep" : "Left-click on Add.",
+				"Expected" : "Active Directory Users and Computers is moved from Available Snap-Ins to Selected Snap-Ins."},
+			{	"TestStep" : "Left-click on OK.",
+				"Expected" : "Add or Remove Snap-Ins window is closed."},
+			{	"TestStep" : "Locate Active Directory Users and Computers under Console Root.",
+				"Expected" : "Active Directory Users and Computers is located."},
+			{	"TestStep" : "Left-click on arrow to left of Active Directory Users and Computers.",
+				"Expected" : "Active Directory Users and Computers is expanded."},
+			{	"TestStep" : "Left-click on arrow to left of <span class=variable>{{DOMAIN}}</span>.tsmil.mil.",
+				"Expected" : "<span class=variable>{{DOMAIN}}</span>.tsmil.mil is expanded."}
+		],
+		"Settings" : [
+			{	"ID"      : "OpenADOption-1",
+				"Type"    : "select",
+				"Options" : ["Domain1", "Domain2"],
+				"Text"    : "Select domain that you are working on.",
+				"Value"   : ""}
 		]
 	}
 ];
