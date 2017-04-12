@@ -2,6 +2,7 @@ data = [
 	{
 		"ID" : "IEOption",
 		"Title" : "Internet Explorer",
+		"Description" : "Describe IEOption",
 		"Steps" : [
 			{	"TestStep" : "Look for Internet Explorer.",
 				"Expected" : "Internet Explorer is found."},
@@ -21,8 +22,9 @@ data = [
 		]
 	},
 	{
-		"ID" : "ADOption",
-		"Title" : "Active Directory",
+		"ID" : "ADProperty",
+		"Title" : "Active Directory - Object Property",
+		"Description" : "Describe ADProperty",
 		"Steps" : [
 			{	"TestStep" : "Step One.",
 				"Expected" : "Done."},
@@ -44,6 +46,7 @@ data = [
 	{
 		"ID" : "ADOpen",
 		"Title" : "Active Directory - Opening",
+		"Description" : "Describe ADOpen",
 		"Steps" : [
 			{	"TestStep" : "Press Windows key on your keyboard",
 				"Expected" : "Start menu opens."},
@@ -91,6 +94,7 @@ data = [
 	{
 		"ID" : "ADFind",
 		"Title" : "Active Directory - Finding",
+		"Description" : "Describe ADFind",
 		"Steps" : [
 			{	"TestStep" : "Locate Active Directory Users and Computers window.",
 				"Expected" : "Active Directory Users and Computers is located."},
@@ -131,6 +135,7 @@ data = [
 	{
 		"ID" : "Blank",
 		"Title" : "Blank Lines",
+		"Description" : "Describe Blank",
 		"Steps" : [
 			{	"TestStep" : "",
 				"Expected" : ""}
