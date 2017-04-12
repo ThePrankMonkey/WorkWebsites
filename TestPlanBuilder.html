@@ -270,7 +270,7 @@
 				selectedEntries = [selectedEntries[0]]
 				// Reorganize currentJSON
 				for (var i=0; i<selectedEntries.length; i++){
-					for (var j=currentJSON.length-1; j>=0; j--){
+					for (var j=currentJSON.length-2; j>=0; j--){
 						var belowElem = currentJSON[j+1]
 						// && !selectedEntries.includes(belowElem.id)
 						if (currentJSON[j].ID == selectedEntries[i]){
