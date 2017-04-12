@@ -63,8 +63,8 @@
 						<br>
 						<select id="chunkSELECT"></select>
 					</div>
-					<div id="optionsDIV">
-					</div>
+					<div id="descriptionDIV"></div>
+					<div id="optionsDIV"></div>
 				</td>
 				<td id="buttons1CELL">
 					<div id="buttons1DIV">
@@ -134,14 +134,15 @@
 					var removeBUTTON = document.getElementById("removeBUTTON")
 					var upBUTTON     = document.getElementById("upBUTTON")
 				// Divs
-					var buttons1DIV = document.getElementById("buttons1DIV")
-					var buttons2DIV = document.getElementById("buttons2DIV")
-					var chunkDIV    = document.getElementById("chunkDIV")
-					var headerDIV   = document.getElementById("headerDIV")
-					var optionsDIV  = document.getElementById("optionsDIV")
-					var outputDIV   = document.getElementById("outputDIV")
-					var replacerDIV = document.getElementById("replacerDIV")
-					var templateDIV = document.getElementById("templateDIV")
+					var buttons1DIV    = document.getElementById("buttons1DIV")
+					var buttons2DIV    = document.getElementById("buttons2DIV")
+					var chunkDIV       = document.getElementById("chunkDIV")
+					var descriptionDIV = document.getElementById("descriptionDIV")
+					var headerDIV      = document.getElementById("headerDIV")
+					var optionsDIV     = document.getElementById("optionsDIV")
+					var outputDIV      = document.getElementById("outputDIV")
+					var replacerDIV    = document.getElementById("replacerDIV")
+					var templateDIV    = document.getElementById("templateDIV")
 				// Labels
 					var chunkLABEL    = document.getElementById("chunkLABEL")
 					var headerLABEL   = document.getElementById("headerLABEL")
@@ -428,10 +429,12 @@
 				while (optionsDIV.hasChildNodes()) {
 					optionsDIV.removeChild(optionsDIV.lastChild);
 				}
-				
 				// find data for option
 				for (var i=0; i<data.length; i++){
 					if (data[i].ID == id){
+						// Add Description
+						descriptionDIV.innerHTML = data[i].Description
+						// Add Option information
 						for(var j=0; j<data[i].Settings.length; j++){
 							switch(data[i].Settings[j].Type){
 								case "checkbox":
