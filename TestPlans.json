@@ -42,8 +42,8 @@ data = [
 		]
 	},
 	{
-		"ID" : "OpenAD",
-		"Title" : "Opening Active Directory",
+		"ID" : "ADOpen",
+		"Title" : "Active Directory - Opening",
 		"Steps" : [
 			{	"TestStep" : "Press Windows key on your keyboard",
 				"Expected" : "Start menu opens."},
@@ -61,11 +61,11 @@ data = [
 				"Expected" : "User password field has focus."},
 			{	"TestStep" : "Enter your admin password into the password field.",
 				"Expected" : "Admin password is entered."},
-			{	"TestStep" : "Left-click on Yes.",
+			{	"TestStep" : "Left-click on Yes button.",
 				"Expected" : "MMC Console window is opened."},
-			{	"TestStep" : "Left-click on File.",
+			{	"TestStep" : "Left-click on File button.",
 				"Expected" : "File context menu opens."},
-			{	"TestStep" : "Left-click on Add/Remove Snap In.",
+			{	"TestStep" : "Left-click on Add/Remove Snap In button.",
 				"Expected" : "Snap In window opens."},
 			{	"TestStep" : "Under Available Snap-Ins, select Active Directory Users and Computers.",
 				"Expected" : "Active Directory Users and Computers is highlighted."},
@@ -81,11 +81,66 @@ data = [
 				"Expected" : "<span class=variable>{{DOMAIN}}</span>.tsmil.mil is expanded."}
 		],
 		"Settings" : [
-			{	"ID"      : "OpenADOption-1",
+			{	"ID"      : "ADOpenOption-1",
 				"Type"    : "select",
 				"Options" : ["Domain1", "Domain2"],
 				"Text"    : "Select domain that you are working on.",
 				"Value"   : ""}
+		]
+	},
+	{
+		"ID" : "ADFind",
+		"Title" : "Active Directory - Finding",
+		"Steps" : [
+			{	"TestStep" : "Locate Active Directory Users and Computers window.",
+				"Expected" : "Active Directory Users and Computers is located."},
+			{	"TestStep" : "Right-click on <span class=variable>{{DOMAIN}}</span>.tsmil.mil.",
+				"Expected" : "Context menu is opened."},
+			{	"TestStep" : "Left-click on Find button.",
+				"Expected" : "Find Users, Contacts, and Groups window opens."},
+			{	"TestStep" : "Left-click on In dropdown.",
+				"Expected" : "In dropdown expands."},
+			{	"TestStep" : "Select Entire Directory.",
+				"Expected" : "In now points to Entire Directory."},
+			{	"TestStep" : "Left-Click in the Name field.",
+				"Expected" : "Name field has focus."},
+			{	"TestStep" : "Type in <span class=variable>{{ADObject}}</span> name.",
+				"Expected" : "<span class=variable>{{ADObject}}</span> name is entered."},
+			{	"TestStep" : "Left-click on Find Now button.",
+				"Expected" : "<span class=variable>{{ADObject}}</span> is found."},
+			{	"TestStep" : "Left-click on <span class=variable>{{ADObject}}</span>.",
+				"Expected" : "<span class=variable>{{ADObject}}</span> is found."},
+			{	"TestStep" : "Right-click on <span class=variable>{{ADObject}}</span> object.",
+				"Expected" : "Context menu opens for <span class=variable>{{ADObject}}</span>."},
+			{	"TestStep" : "Left-click on Properties.",
+				"Expected" : "<span class=variable>{{ADObject}}</span> object Property window opens."}
+		],
+		"Settings" : [
+			{	"ID"      : "ADFindOption-1",
+				"Type"    : "select",
+				"Options" : ["Domain1", "Domain2"],
+				"Text"    : "Select domain that you are working on.",
+				"Value"   : ""},
+			{	"ID"      : "ADFindOption-2",
+				"Type"    : "select",
+				"Options" : ["Computer", "Group", "User"],
+				"Text"    : "Select ADObject type you need.",
+				"Value"   : ""}
+		]
+	},
+	{
+		"ID" : "Blank",
+		"Title" : "Blank Lines",
+		"Steps" : [
+			{	"TestStep" : "",
+				"Expected" : ""}
+		],
+		"Settings" : [
+			{	"ID"    : "BlankOption-1",
+				"Type"  : "text",
+				"Text"  : "How many blank lines do you want?",
+				"Var"   : "",
+				"Value" : ""}
 		]
 	}
 ];
