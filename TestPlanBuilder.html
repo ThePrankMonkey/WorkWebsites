@@ -55,13 +55,15 @@
 		</div>
 		<table id="topTABLE">
 			<tr>
-				<td id="templateCELL">
-					<div id="templateDIV">
-						<label id="templateLABEL" class="description">
-							Process Here
+				<td id="chunkCELL">
+					<div id="chunkDIV">
+						<label id="chunkLABEL" class="description">
+							Select from Here
 						</label>
 						<br>
-						<select id="templateSELECT"></select>
+						<select id="chunkSELECT"></select>
+					</div>
+					<div id="optionsDIV">
 					</div>
 				</td>
 				<td id="buttons1CELL">
@@ -75,15 +77,13 @@
 						<input type="button" id="downBUTTON"   value="Down"/>
 					</div>
 				</td>
-				<td id="chunkCELL">
-					<div id="chunkDIV">
-						<label id="chunkLABEL" class="description">
-							Select from Here
+				<td id="templateCELL">
+					<div id="templateDIV">
+						<label id="templateLABEL" class="description">
+							Process Here
 						</label>
 						<br>
-						<select id="chunkSELECT"></select>
-					</div>
-					<div id="optionsDIV">
+						<select id="templateSELECT"></select>
 					</div>
 				</td>
 			</tr>
@@ -252,6 +252,7 @@
 				for (var i=0; i<selectedEntries.length; i++){
 					for (var j=currentJSON.length-1; j>=0; j--){
 						var belowElem = currentJSON[j+1]
+						// && !selectedEntries.includes(belowElem.id)
 						if (currentJSON[j].ID == selectedEntries[i]){
 							currentJSON[j+1] = currentJSON[j]
 							currentJSON[j] = belowElem
