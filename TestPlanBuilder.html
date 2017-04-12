@@ -114,6 +114,8 @@
 						<input type="button" id="exportBUTTON" value="Export"/>
 						<br>
 						<input type="button" id="importBUTTON" value="Import"/>
+						<br>
+						<input type="button" id="passBUTTON"   value="Pass All"/>
 					</div>
 				</td>
 			</tr>
@@ -128,6 +130,7 @@
 					var downBUTTON   = document.getElementById("downBUTTON")
 					var exportBUTTON = document.getElementById("exportBUTTON")
 					var importBUTTON = document.getElementById("importBUTTON")
+					var passBUTTON   = document.getElementById("passBUTTON")
 					var removeBUTTON = document.getElementById("removeBUTTON")
 					var upBUTTON     = document.getElementById("upBUTTON")
 				// Divs
@@ -197,7 +200,7 @@
 				currentJSON.push(tempJSON)
 			}
 			
-			function BuildTable(){
+			function BuildTable(type){
 				console.log("Build Table")
 				// Clear Table
 				while (outputTABLE.hasChildNodes()) {
@@ -209,25 +212,25 @@
 				outputTABLE.appendChild(headRow)
 				var headStep = document.createElement("th")
 					headStep.innerHTML = "Step"
-					headRow.appendChild(headStep)
 				var headTestStep = document.createElement("th")
 					headTestStep.innerHTML = "Test Steps"
-					headRow.appendChild(headTestStep)
 				var headTestData = document.createElement("th")
 					headTestData.innerHTML = "Test Data"
-					headRow.appendChild(headTestData)
 				var headExpected = document.createElement("th")
 					headExpected.innerHTML = "Expected Results"
-					headRow.appendChild(headExpected)
 				var headActual = document.createElement("th")
 					headActual.innerHTML = "Actual Results"
-					headRow.appendChild(headActual)
 				var headStatus = document.createElement("th")
 					headStatus.innerHTML = "Status (Pass/Fail)"
-					headRow.appendChild(headStatus)
 				var headNotes = document.createElement("th")
 					headNotes.innerHTML = "Notes"
-					headRow.appendChild(headNotes)
+				headRow.appendChild(headStep)
+				headRow.appendChild(headTestStep)
+				headRow.appendChild(headTestData)
+				headRow.appendChild(headExpected)
+				headRow.appendChild(headActual)
+				headRow.appendChild(headStatus)
+				headRow.appendChild(headNotes)
 				// Build rows
 				var step = 1
 				for (var i=0; i<currentJSON.length; i++){
@@ -237,21 +240,27 @@
 						outputTABLE.appendChild(newRow)
 						var stepStep = document.createElement("td")
 							stepStep.innerHTML = step + "."
-							newRow.appendChild(stepStep)
 						var testStep = document.createElement("td")
 							testStep.innerHTML = currentJSON[i].Steps[j].TestStep
-							newRow.appendChild(testStep)
 						var actualData = document.createElement("td")
-							newRow.appendChild(actualData)
 						var expectedResults = document.createElement("td")
 							expectedResults.innerHTML = currentJSON[i].Steps[j].Expected
-							newRow.appendChild(expectedResults)
 						var actualResults = document.createElement("td")
-							newRow.appendChild(actualResults)
+							if(type == "pass"){
+								actualResults.innerHTML = currentJSON[i].Steps[j].Expected
+							}
 						var status = document.createElement("td")
-							newRow.appendChild(status)
+							if(type == "pass"){
+								status.innerHTML = "Pass"
+							}
 						var notes = document.createElement("td")
-							newRow.appendChild(notes)
+						newRow.appendChild(stepStep)
+						newRow.appendChild(testStep)
+						newRow.appendChild(actualData)
+						newRow.appendChild(expectedResults)
+						newRow.appendChild(actualResults)
+						newRow.appendChild(status)
+						newRow.appendChild(notes)
 						step++
 					}
 				}
@@ -330,7 +339,7 @@
 								currentJSON = JSON.parse(e.target.result)
 								input.parentNode.removeChild(input)
 								RebuildTemplateSelect()
-								BuildTable()
+								BuildTable("empty")
 							}
 							reader.readAsText(file)
 					}
@@ -526,12 +535,13 @@
 				
 				
 				// Assign Functions to Buttons
-					addBUTTON.onclick    = function(){ Add();    BuildTable(); }
-					downBUTTON.onclick   = function(){ Down();   BuildTable(); }
+					addBUTTON.onclick    = function(){ Add();    BuildTable("empty"); }
+					downBUTTON.onclick   = function(){ Down();   BuildTable("empty"); }
 					exportBUTTON.onclick = function(){ Export(); }
 					importBUTTON.onclick = function(){ Import(); }
-					removeBUTTON.onclick = function(){ Remove(); BuildTable(); }
-					upBUTTON.onclick     = function(){ Up();     BuildTable(); }
+					passBUTTON.onclick   = function(){ BuildTable("pass") }
+					removeBUTTON.onclick = function(){ Remove(); BuildTable("empty"); }
+					upBUTTON.onclick     = function(){ Up();     BuildTable("empty"); }
 			}
 			
 			
