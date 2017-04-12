@@ -18,6 +18,9 @@
 			.description{
 				color: black;
 			}
+			.property{
+				font-style: italic;
+			}
 			#descriptionDIV{
 				font-style: italic;
 			}
@@ -170,7 +173,7 @@
 				var tempOption = document.createElement("option")
 					tempOption.id = uniqueID
 					tempOption.value = chunkSELECT.value
-					tempOption.innerHTML = chunkSELECT.value
+					tempOption.innerHTML = chunkSELECT.childNodes[chunkSELECT.selectedIndex].innerText
 				templateSELECT.appendChild(tempOption)
 				templateSELECT.size = templateSELECT.childNodes.length
 				// Add item to currentJSON
@@ -364,7 +367,7 @@
 					var tempOption = document.createElement("option")
 						tempOption.value = currentJSON[i].ID
 						tempOption.id = currentJSON[i].ID
-						tempOption.innerHTML = currentJSON[i].ID
+						tempOption.innerHTML = currentJSON[i].Title
 					templateSELECT.appendChild(tempOption)
 				}
 				templateSELECT.size = templateSELECT.childNodes.length
@@ -541,6 +544,8 @@
 						evt.initEvent("change", false, true)
 					chunkSELECT.dispatchEvent(evt)
 				
+				// Build an empty table.
+				BuildTable("empty")
 				
 				// Assign Functions to Buttons
 					addBUTTON.onclick    = function(){ Add();    BuildTable("empty"); }
