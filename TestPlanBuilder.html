@@ -239,6 +239,35 @@
 			
 			function Down(){
 				console.log("Down")
+				// Find which entries are selected
+				var selectedEntries = []
+				for (var i=0; i<templateSELECT.childNodes.length; i++){
+					if (templateSELECT.childNodes[i].selected == true){
+						selectedEntries.push(templateSELECT.childNodes[i].id)
+					}
+				}
+				// Only keep the first one until a fix is created for issue.
+				selectedEntries = [selectedEntries[0]]
+				// Reorganize currentJSON
+				for (var i=0; i<selectedEntries.length; i++){
+					for (var j=currentJSON.length-1; j>=0; j--){
+						var belowElem = currentJSON[j+1]
+						if (currentJSON[j].ID == selectedEntries[i]){
+							currentJSON[j+1] = currentJSON[j]
+							currentJSON[j] = belowElem
+						}
+					}
+				}
+				// Rebuild templateSELECT
+				RebuildTemplateSelect()
+				// Reselect entries
+				for (var i=0; i<selectedEntries.length; i++){
+					for (var j=0; j<templateSELECT.childNodes.length; j++){
+						if (templateSELECT.childNodes[j].id == selectedEntries[i]){
+							templateSELECT.childNodes[j].selected = true
+						}
+					}
+				}
 			}
 			
 			function Export(){
@@ -260,14 +289,6 @@
 				link.href = makeTextFile(outputContent);
 				link.download = "Export Data " + (new Date).toISOString() + ".txt"
 				link.click()
-			}
-			
-			function GetOptions(){
-				console.log("Adding label")
-				var labelText = ""
-				for (var i=0; i<optionsDIV.childNodes.length; i++){
-					labelText += optionsDIV.childNodes[i].childNodes[0].type
-				}
 			}
 			
 			function Import(){
@@ -340,6 +361,35 @@
 			
 			function Up(){
 				console.log("Up")
+				// Find which entries are selected
+				var selectedEntries = []
+				for (var i=0; i<templateSELECT.childNodes.length; i++){
+					if (templateSELECT.childNodes[i].selected == true){
+						selectedEntries.push(templateSELECT.childNodes[i].id)
+					}
+				}
+				// Only keep the first one until a fix is created for issue.
+				selectedEntries = [selectedEntries[0]]
+				// Reorganize currentJSON
+				for (var i=0; i<selectedEntries.length; i++){
+					for (var j=1; j<currentJSON.length; j++){
+						var aboveElem = currentJSON[j-1]
+						if (currentJSON[j].ID == selectedEntries[i]){
+							currentJSON[j-1] = currentJSON[j]
+							currentJSON[j] = aboveElem
+						}
+					}
+				}
+				// Rebuild templateSELECT
+				RebuildTemplateSelect()
+				// Reselect entries
+				for (var i=0; i<selectedEntries.length; i++){
+					for (var j=0; j<templateSELECT.childNodes.length; j++){
+						if (templateSELECT.childNodes[j].id == selectedEntries[i]){
+							templateSELECT.childNodes[j].selected = true
+						}
+					}
+				}
 			}
 			
 			function UpdateOptions(id){
