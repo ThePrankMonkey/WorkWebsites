@@ -346,9 +346,9 @@
 							reader.onload = function(e){
 								console.log(e.target.result)
 								currentJSON = JSON.parse(e.target.result)
-								input.parentNode.removeChild(input)
 								RebuildTemplateSelect()
 								BuildTable("empty")
+								input.parentNode.removeChild(input)
 							}
 							reader.readAsText(file)
 					}
