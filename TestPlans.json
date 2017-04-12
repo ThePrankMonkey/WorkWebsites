@@ -24,7 +24,7 @@ data = [
 	{
 		"ID" : "ADProperty",
 		"Title" : "Active Directory - Object Property",
-		"Description" : "Describe ADProperty",
+		"Description" : "This contains the steps to find the object property for a previously found ADObject from an already opened Active Directory.",
 		"Steps" : [
 			{	"TestStep" : "Step One.",
 				"Expected" : "Done."},
@@ -46,7 +46,7 @@ data = [
 	{
 		"ID" : "ADOpen",
 		"Title" : "Active Directory - Opening",
-		"Description" : "Describe ADOpen",
+		"Description" : "This contains the steps necessary for opening Active Directory from scratch using MMC snap ins.",
 		"Steps" : [
 			{	"TestStep" : "Press Windows key on your keyboard",
 				"Expected" : "Start menu opens."},
@@ -94,7 +94,7 @@ data = [
 	{
 		"ID" : "ADFind",
 		"Title" : "Active Directory - Finding",
-		"Description" : "Describe ADFind",
+		"Description" : "This contains the steps to search for your desired ADObject from an already opened Active Directory.",
 		"Steps" : [
 			{	"TestStep" : "Locate Active Directory Users and Computers window.",
 				"Expected" : "Active Directory Users and Computers is located."},
@@ -135,7 +135,7 @@ data = [
 	{
 		"ID" : "Blank",
 		"Title" : "Blank Lines",
-		"Description" : "Describe Blank",
+		"Description" : "This will add the amount of blank lines that you select.",
 		"Steps" : [
 			{	"TestStep" : "",
 				"Expected" : ""}
