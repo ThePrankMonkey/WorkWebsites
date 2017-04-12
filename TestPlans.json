@@ -1,54 +1,5 @@
 data = [
 	{
-		"ID" : "IEOption",
-		"Title" : "Internet Explorer",
-		"Description" : "Describe IEOption",
-		"Steps" : [
-			{	"TestStep" : "Look for Internet Explorer.",
-				"Expected" : "Internet Explorer is found."},
-			{	"TestStep" : "Step Two.",
-				"Expected" : "Step two completed."}
-		],
-		"Settings" : [
-			{	"ID"      : "IEOption-1",
-				"Type"    : "checkbox",
-				"Text"    : "IE Test Text",
-				"Value"   : ""},
-			{	"ID"      : "IEOption-2",
-				"Type"    : "select",
-				"Options" : ["Computer", "User", "Group"],
-				"Text"    : "IE Test Text",
-				"Value"   : ""}
-		]
-	},
-	{
-		"ID" : "ADProperty",
-		"Title" : "Active Directory - Object Property",
-		"Description" : "This contains the steps to find the object property for a previously found ADObject from an already opened Active Directory.",
-		"Steps" : [
-			{	"TestStep" : "Left-click on Account tab.",
-				"Expected" : "<span class=variable>{{ADObject}}</span> property window changes to Account tab."},
-			{	"TestStep" : "Under account options, look for \"<span class=property>{{Prop}}</span>\".",
-				"Expected" : "Account option is found."},
-			{	"TestStep" : "Check if \"<span class=property>{{Prop}}</span>\" account option is unchecked.",
-				"Expected" : "Account option is unchecked."},
-			{	"TestStep" : "Left-click cancel on <span class=variable>{{ADObject}}</span> property window.",
-				"Expected" : "<span class=variable>{{ADObject}}</span> property window closes."}
-		],
-		"Settings" : [
-			{	"ID"    : "ADProperty-1",
-				"Type"  : "text",
-				"Text"  : "The ADObject you are working on.",
-				"Var"   : "ADObject",
-				"Value" : ""},
-			{	"ID"    : "ADProperty-2",
-				"Type"  : "text",
-				"Text"  : "The text of the property you need.",
-				"Var"   : "Prop",
-				"Value" : ""}
-		]
-	},
-	{
 		"ID" : "ADOpen",
 		"Title" : "Active Directory - Opening",
 		"Description" : "This contains the steps necessary for opening Active Directory from scratch using MMC snap ins.",
@@ -101,7 +52,7 @@ data = [
 		"Title" : "Active Directory - Finding",
 		"Description" : "This contains the steps to search for your desired ADObject from an already opened Active Directory.",
 		"Steps" : [
-			{	"TestStep" : "Locate Active Directory Users and Computers window.",
+			{	"TestStep" : "Locate Active Directory Users and Computers in open MMC Console window.",
 				"Expected" : "Active Directory Users and Computers is located."},
 			{	"TestStep" : "Right-click on <span class=variable>{{DOMAIN}}</span>.tsmil.mil.",
 				"Expected" : "Context menu is opened."},
@@ -138,6 +89,33 @@ data = [
 		]
 	},
 	{
+		"ID" : "ADProperty",
+		"Title" : "Active Directory - Object Property",
+		"Description" : "This contains the steps to find the object property for a previously found ADObject from an already opened Active Directory.",
+		"Steps" : [
+			{	"TestStep" : "Left-click on Account tab.",
+				"Expected" : "<span class=variable>{{ADObject}}</span> property window changes to Account tab."},
+			{	"TestStep" : "Under account options, look for \"<span class=property>{{Prop}}</span>\".",
+				"Expected" : "Account option is found."},
+			{	"TestStep" : "Check if \"<span class=property>{{Prop}}</span>\" account option is unchecked.",
+				"Expected" : "Account option is unchecked."},
+			{	"TestStep" : "Left-click cancel on <span class=variable>{{ADObject}}</span> property window.",
+				"Expected" : "<span class=variable>{{ADObject}}</span> property window closes."}
+		],
+		"Settings" : [
+			{	"ID"    : "ADProperty-1",
+				"Type"  : "text",
+				"Text"  : "The ADObject you are working on.",
+				"Var"   : "ADObject",
+				"Value" : ""},
+			{	"ID"    : "ADProperty-2",
+				"Type"  : "text",
+				"Text"  : "The text of the property you need.",
+				"Var"   : "Prop",
+				"Value" : ""}
+		]
+	},
+	{
 		"ID" : "Blank",
 		"Title" : "Blank Lines",
 		"Description" : "This will add the amount of blank lines that you select.",
@@ -150,6 +128,38 @@ data = [
 				"Type"  : "text",
 				"Text"  : "How many blank lines do you want?",
 				"Var"   : "",
+				"Value" : ""}
+		]
+	},
+	{
+		"ID" : "AppIE",
+		"Title" : "Application - IE",
+		"Description" : "This contains the steps necessary to open IE and go to a directed page.",
+		"Steps" : [
+			{	"TestStep" : "Press Windows key on your keyboard",
+				"Expected" : "Start menu opens."},
+			{	"TestStep" : "In search bar, type \"iexplore.exe\".",
+				"Expected" : "\"iexplore.exe\" test is entered."},
+			{	"TestStep" : "In results, right-click on iexplore.exe.",
+				"Expected" : "Context Menu is opened."},
+			{	"TestStep" : "Left-click on Open.",
+				"Expected" : "If Confirm Smart Card window opens, proceed to next step. Otherwise, Internet Explorer window is opened and skip the next two steps."},
+			{	"TestStep" : "Enter your pin into the Pin field of the Confirm Smart Card Window.",
+				"Expected" : "Your pin has been entered into the Pin field of the Confirm Smart Card window."},
+			{	"TestStep" : "Left-click on the OK button of the Confirm Smart Card window.",
+				"Expected" : "The Confirm Smart Card window is closed."},
+			{	"TestStep" : "Left-click into the Address field at the top of the Internet Explorer window",
+				"Expected" : "The Address field has focus."},
+			{	"TestStep" : "Enter <span class=variable>{{URL}}</span> into the Address field.",
+				"Expected" : "<span class=variable>{{URL}}</span> is entered into the Address field."},
+			{	"TestStep" : "Press Enter key on your keyboard.",
+				"Expected" : "<span class=variable>{{URL}}</span> page loads."}
+		],
+		"Settings" : [
+			{	"ID"    : "AppIEOption-1",
+				"Type"  : "text",
+				"Text"  : "Which website URL you want to load the page for.",
+				"Var"   : "URL",
 				"Value" : ""}
 		]
 	},
@@ -196,34 +206,140 @@ data = [
 		]
 	},
 	{
-		"ID" : "AppIE",
-		"Title" : "Application - IE",
-		"Description" : "This contains the steps necessary to open IE and go to a directed page.",
+		"ID" : "CertOpen",
+		"Title" : "Certificate - Opening",
+		"Description" : "This contains the steps necessary for opening Certificate Manager from scratch using MMC snap ins.",
 		"Steps" : [
 			{	"TestStep" : "Press Windows key on your keyboard",
 				"Expected" : "Start menu opens."},
-			{	"TestStep" : "In search bar, type \"iexplore.exe\".",
-				"Expected" : "\"iexplore.exe\" test is entered."},
-			{	"TestStep" : "In results, right-click on iexplore.exe.",
+			{	"TestStep" : "In search bar, type \"mmc.exe\".",
+				"Expected" : "\"mmc.exe\" test is entered."},
+			{	"TestStep" : "In results, right-click on mmc.exe.",
 				"Expected" : "Context Menu is opened."},
-			{	"TestStep" : "Left-click on Open.",
-				"Expected" : "If Confirm Smart Card window opens, proceed to next step. Otherwise, Internet Explorer window is opened and skip the next two steps."},
-			{	"TestStep" : "Enter your pin into the Pin field of the Confirm Smart Card Window.",
-				"Expected" : "Your pin has been entered into the Pin field of the Confirm Smart Card window."},
-			{	"TestStep" : "Left-click on the OK button of the Confirm Smart Card window.",
-				"Expected" : "The Confirm Smart Card window is closed."},
-			{	"TestStep" : "Left-click into the Address field at the top of the Internet Explorer window",
-				"Expected" : "The Address field has focus."},
-			{	"TestStep" : "Enter <span class=variable>{{URL}}</span> into the Address field.",
-				"Expected" : "<span class=variable>{{URL}}</span> is entered into the Address field."},
-			{	"TestStep" : "Press Enter key on your keyboard.",
-				"Expected" : "<span class=variable>{{URL}}</span> page loads."}
+			{	"TestStep" : "Left-click on Run as Administrator.",
+				"Expected" : "Credential Logon window is opened."},
+			{	"TestStep" : "Left-click on the user name field.",
+				"Expected" : "User name field has focus."},
+			{	"TestStep" : "Enter your domain and the username for your admin account in the user name field in the following format: \"Domain\UserName\".",
+				"Expected" : "Admin domain and user name are entered."},
+			{	"TestStep" : "Left-click on the password field.",
+				"Expected" : "User password field has focus."},
+			{	"TestStep" : "Enter your admin password into the password field.",
+				"Expected" : "Admin password is entered."},
+			{	"TestStep" : "Left-click on Yes button.",
+				"Expected" : "MMC Console window is opened."},
+			{	"TestStep" : "Left-click on File button.",
+				"Expected" : "File context menu opens."},
+			{	"TestStep" : "Left-click on Add/Remove Snap In button.",
+				"Expected" : "Snap In window opens."},
+			{	"TestStep" : "Under Available Snap-Ins, select Certificates.",
+				"Expected" : "Certificates is highlighted."},
+			{	"TestStep" : "Left-click on Add.",
+				"Expected" : "Certificates Snap-In window is opened"},
+			{	"TestStep" : "Ensure that My User Account remains selected.",
+				"Expected" : "My User Account is still remains selected."},
+			{	"TestStep" : "Left-click on Finish.",
+				"Expected" : "Certificates Snap-In window is closed and Certificates is moved from Available Snap-Ins to Selected Snap-Ins."},
+			{	"TestStep" : "Left-click on OK.",
+				"Expected" : "Add or Remove Snap-Ins window is closed."},
+			{	"TestStep" : "Locate Certificates under Console Root.",
+				"Expected" : "Certificates is located."},
+			{	"TestStep" : "Left-click on arrow to left of Certificates.",
+				"Expected" : "Certificates is expanded."}
 		],
 		"Settings" : [
-			{	"ID"    : "AppIEOption-1",
+		]
+	},
+	{
+		"ID" : "CertEnroll",
+		"Title" : "Certificate - Enrollment",
+		"Description" : "This contains the steps necessary for adding an Enrollment Agent certificate from an already opened Certificates Manager. This needs to be done on a 2008 Server or later.",
+		"Steps" : [
+			{	"TestStep" : "Locate Certificates in open MMC Console window.",
+				"Expected" : "Certificates is located."},
+			{	"TestStep" : "Locate Personal under Certificates.",
+				"Expected" : "Personal is located."},
+			{	"TestStep" : "right-click on Personal.",
+				"Expected" : "Context menu for Personal is opened."},
+			{	"TestStep" : "Left-click on All Tasks on context menu.",
+				"Expected" : "All Tasks is expanded."},
+			{	"TestStep" : "Left-click on Request New Certificate.",
+				"Expected" : "Certificate Enrollment window is opened."},
+			{	"TestStep" : "Left-click on Next button.",
+				"Expected" : "Certificate Enrollment window progresses to Select Certificate Enrollment Policy page."},
+			{	"TestStep" : "Left-click on Next button.",
+				"Expected" : "Certificate Enrollment window progresses to Request Certificates page."},
+			{	"TestStep" : "Locate Enrollment Agent under Active Directory Enrollment Policy.",
+				"Expected" : "Enrollment Agent is located."},
+			{	"TestStep" : "Left-click on checkbox to left of Enrollment Agent.",
+				"Expected" : "Checkbox is checked."},
+			{	"TestStep" : "Left-click on Enroll button.",
+				"Expected" : "Certificate Enrollment window progresses to Certificate Installation Results page."},
+			{	"TestStep" : "Confirm that the Status for Enrollment Agent is Succeeded.",
+				"Expected" : "Status for Enrollment Agent is Succeeded."},
+			{	"TestStep" : "Left-click on Finish button.",
+				"Expected" : "Certificate Enrollment window is closed."}
+		],
+		"Settings" : [
+		]
+	},
+	{
+		"ID" : "Test",
+		"Title" : "Test",
+		"Description" : "Test",
+		"Steps" : [
+			{	"TestStep" : "",
+				"Expected" : ""},
+			{	"TestStep" : "",
+				"Expected" : ""},
+			{	"TestStep" : "",
+				"Expected" : ""}
+		],
+		"Settings" : [
+			{	"ID"    : "TestOption-1",
 				"Type"  : "text",
-				"Text"  : "Which website URL you want to load the page for.",
-				"Var"   : "URL",
+				"Text"  : "Test",
+				"Var"   : "Test",
+				"Value" : ""}
+		]
+	},
+	{
+		"ID" : "Test",
+		"Title" : "Test",
+		"Description" : "Test",
+		"Steps" : [
+			{	"TestStep" : "",
+				"Expected" : ""},
+			{	"TestStep" : "",
+				"Expected" : ""},
+			{	"TestStep" : "",
+				"Expected" : ""}
+		],
+		"Settings" : [
+			{	"ID"    : "TestOption-1",
+				"Type"  : "text",
+				"Text"  : "Test",
+				"Var"   : "Test",
+				"Value" : ""}
+		]
+	},
+	{
+		"ID" : "Test",
+		"Title" : "Test",
+		"Description" : "Test",
+		"Steps" : [
+			{	"TestStep" : "",
+				"Expected" : ""},
+			{	"TestStep" : "",
+				"Expected" : ""},
+			{	"TestStep" : "",
+				"Expected" : ""}
+		],
+		"Settings" : [
+			{	"ID"    : "TestOption-1",
+				"Type"  : "text",
+				"Text"  : "Test",
+				"Var"   : "Test",
 				"Value" : ""}
 		]
 	}
