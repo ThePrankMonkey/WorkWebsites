@@ -15,14 +15,17 @@
 			tr{
 				font-size: 0.750em;
 			}
-			.description{
+			.label{
 				color: black;
 			}
 			.property{
 				font-style: italic;
 			}
-			#descriptionDIV{
+			.description{
 				font-style: italic;
+			}
+			.requirement{
+				font-size: 0.750em;
 			}
 			#headerDIV{
 				color: black;
@@ -65,13 +68,14 @@
 			<tr>
 				<td id="chunkCELL">
 					<div id="chunkDIV">
-						<label id="chunkLABEL" class="description">
+						<label id="chunkLABEL" class="label">
 							Select from Here
 						</label>
 						<br>
 						<select id="chunkSELECT"></select>
 					</div>
 					<div id="descriptionDIV"></div>
+					<div id="requirementsDIV"></div>
 					<div id="optionsDIV"></div>
 				</td>
 				<td id="buttons1CELL">
@@ -87,7 +91,7 @@
 				</td>
 				<td id="templateCELL">
 					<div id="templateDIV">
-						<label id="templateLABEL" class="description">
+						<label id="templateLABEL" class="label">
 							Process Here
 						</label>
 						<br>
@@ -100,7 +104,7 @@
 			<tr>
 				<td>
 					<div id="outputDIV">
-						<label id="outputLABEL" class="description">
+						<label id="outputLABEL" class="label">
 							Find the created table below
 						</label>
 						<br>
@@ -142,15 +146,16 @@
 					var removeBUTTON = document.getElementById("removeBUTTON")
 					var upBUTTON     = document.getElementById("upBUTTON")
 				// Divs
-					var buttons1DIV    = document.getElementById("buttons1DIV")
-					var buttons2DIV    = document.getElementById("buttons2DIV")
-					var chunkDIV       = document.getElementById("chunkDIV")
-					var descriptionDIV = document.getElementById("descriptionDIV")
-					var headerDIV      = document.getElementById("headerDIV")
-					var optionsDIV     = document.getElementById("optionsDIV")
-					var outputDIV      = document.getElementById("outputDIV")
-					var replacerDIV    = document.getElementById("replacerDIV")
-					var templateDIV    = document.getElementById("templateDIV")
+					var buttons1DIV     = document.getElementById("buttons1DIV")
+					var buttons2DIV     = document.getElementById("buttons2DIV")
+					var chunkDIV        = document.getElementById("chunkDIV")
+					var descriptionDIV  = document.getElementById("descriptionDIV")
+					var headerDIV       = document.getElementById("headerDIV")
+					var optionsDIV      = document.getElementById("optionsDIV")
+					var outputDIV       = document.getElementById("outputDIV")
+					var replacerDIV     = document.getElementById("replacerDIV")
+					var requirementsDIV = document.getElementById("requirementsDIV")
+					var templateDIV     = document.getElementById("templateDIV")
 				// Labels
 					var chunkLABEL    = document.getElementById("chunkLABEL")
 					var headerLABEL   = document.getElementById("headerLABEL")
@@ -252,11 +257,19 @@
 						var testStep = document.createElement("td")
 							testStep.innerHTML = currentJSON[i].Steps[j].TestStep
 						var actualData = document.createElement("td")
+							if(currentJSON[i].Steps[j].TestData){
+								actualData.innerHTML = currentJSON[i].Steps[j].TestData
+							}
 						var expectedResults = document.createElement("td")
 							expectedResults.innerHTML = currentJSON[i].Steps[j].Expected
 						var actualResults = document.createElement("td")
 							if(type == "pass"){
-								actualResults.innerHTML = currentJSON[i].Steps[j].Expected
+								if(currentJSON[i].Steps[j].Actual){
+									actualResults.innerHTML = currentJSON[i].Steps[j].Actual[Math.floor(Math.random() * currentJSON[i].Steps[j].Actual.length)]
+								}
+								else{
+									actualResults.innerHTML = currentJSON[i].Steps[j].Expected
+								}
 							}
 						var status = document.createElement("td")
 							if(type == "pass"){
@@ -437,11 +450,32 @@
 				while (optionsDIV.hasChildNodes()) {
 					optionsDIV.removeChild(optionsDIV.lastChild);
 				}
+				// clear all Requirements elements
+				while (requirementsDIV.hasChildNodes()) {
+					requirementsDIV.removeChild(requirementsDIV.lastChild);
+				}
+				requirementsDIV.innerHTML = ""
 				// find data for option
 				for (var i=0; i<data.length; i++){
 					if (data[i].ID == id){
 						// Add Description
 						descriptionDIV.innerHTML = data[i].Description
+						descriptionDIV.className = "description"
+						// Add Requirements
+						if (data[i].Requirements.length){
+							var requirementsSPAN = document.createElement("span")
+								requirementsSPAN.innerHTML = "Requires:"
+								requirementsSPAN.className = "description"
+							requirementsDIV.appendChild(requirementsSPAN)
+							var requirementsUL = document.createElement("ul")
+							requirementsDIV.appendChild(requirementsUL)
+							for(var j=0; j<data[i].Requirements.length; j++){
+								var requirementsLI = document.createElement("li")
+									requirementsLI.innerHTML = data[i].Requirements[j]
+									requirementsLI.className = "requirement"
+								requirementsUL.appendChild(requirementsLI)
+							}
+						}
 						// Add Option information
 						for(var j=0; j<data[i].Settings.length; j++){
 							switch(data[i].Settings[j].Type){
