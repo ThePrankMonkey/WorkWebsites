@@ -119,23 +119,6 @@ data = [
 		]
 	},
 	{
-		"ID" : "Blank",
-		"Title" : "Blank Lines",
-		"Description" : "This will add the amount of blank lines that you select.",
-		"Requirements" : [],
-		"Steps" : [
-			{	"TestStep" : "",
-				"Expected" : ""}
-		],
-		"Settings" : [
-			{	"ID"    : "BlankOption-1",
-				"Type"  : "text",
-				"Text"  : "How many blank lines do you want?",
-				"Var"   : "",
-				"Value" : ""}
-		]
-	},
-	{
 		"ID" : "AppIE",
 		"Title" : "Application - IE",
 		"Description" : "This contains the steps necessary to open IE and go to a directed page.",
@@ -209,6 +192,23 @@ data = [
 				"Text"  : "Which server you want to log on to.",
 				"Var"   : "Server",
 				"Value" : ""}
+		]
+	},
+	{
+		"ID" : "Blank",
+		"Title" : "Blank Lines",
+		"Description" : "This will add the amount of blank lines that you select.",
+		"Requirements" : [],
+		"Steps" : [
+			{	"TestStep" : "",
+				"Expected" : ""}
+		],
+		"Settings" : [
+			{	"ID"       : "BlankOption-1",
+				"Type"     : "select",
+				"Options"  : [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
+				"Text"     : "How many blank lines?",
+				"Value"    : ""}
 		]
 	},
 	{
@@ -301,16 +301,22 @@ data = [
 							"an enrollment certificate installed", 
 							"opened Internet Explorer"],
 		"Steps" : [
+			{	"TestStep" : "Insert the <span class=variable>{{TempSmartCardOld}}</span> into your card reader.",
+				"Expected" : "<span class=variable>{{TempSmartCardOld}}</span> is inserted into your smart card reader."},
 			{	"TestStep" : "Under Select a Task, left-click on Request a certificate link.",
 				"Expected" : "Microsoft Certificate Services page advances to Request a Certificate page."},
 			{	"TestStep" : "Left-click on Advanced Certificate Request link.",
 				"Expected" : "Request a Certificate page advances to Advance Certificate Request page."},
 			{	"TestStep" : "Left-click on Request a certificate for a smart card on behalf of another user by using the smart card certificate enrollment station link.",
 				"Expected" : "Advance Certificate Request page advances to SmartCard Certificate Enrollment Station page."},
-			{	"TestStep" : "Left-click on Certificate Template field.",
-				"Expected" : "Certificate Template field is expanded."},
+			{	"TestStep" : "Left-click on Certificate Template dropdown.",
+				"Expected" : "Certificate Template dropdown is expanded."},
 			{	"TestStep" : "Left-click on ASC Smartcard User.",
-				"Expected" : "Certificate field now evaluates to ASC Smartcard User."},
+				"Expected" : "Certificate Template dropdown now evaluates to ASC Smartcard User."},
+			{	"TestStep" : "Left-click on Cryptographic Service Provider dropdown.",
+				"Expected" : "Cryptographic Service Provider dropdown is expanded."},
+			{	"TestStep" : "Left-click on Gemalto Access Client Cryptographic Service Provider.",
+				"Expected" : "Cryptographic Service Provider dropdown now evaluates to Gemalto Access Client Cryptographic Service Provider."},
 			{	"TestStep" : "Left-click on Select User... button.",
 				"Expected" : "Select User window is opened."},
 			{	"TestStep" : "In Select User window, in  Enter the Object Name to Select (examples) field, enter TestData for <span class=variable>{{TestAccount}}</span>.",
@@ -327,13 +333,17 @@ data = [
 			{	"TestStep" : "Left-click on OK button.",
 				"Expected" : "Select User window is closed."},
 			{	"TestStep" : "Left-click on Enroll button.",
-				"Expected" : "\"Please insert the user's smart card\" message window appears."},
-			{	"TestStep" : "Insert the <span class=variable>{{TempSmartCardOld}}</span> into your card reader.",
-				"Expected" : "<span class=variable>{{TempSmartCardOld}}</span> is inserted into your smart card reader."},
-			{	"TestStep" : "Left-click on OK button in \"Please insert the user's smart card\" message window.",
-				"Expected" : "\"Please insert the user's smart card\" message window closes."},
-			{	"TestStep" : "Wait for smart card to have it's cert installed.",
-				"Expected" : "Certificate for <span class=variable>{{TestAccount}}</span> is installed."}
+				"Expected" : "Confirm Smart Card Pin window appears."},
+			{	"TestStep" : "Left-click on PIN field in Confirm Smart Card Pin window.",
+				"Expected" : "PIN field has focus."},
+			{	"TestStep" : "Enter the known PIN for <span class=variable>{{TempSmartCardOld}}</span> into the PIN field.",
+				"Expected" : "PIN field contains the known PIN for <span class=variable>{{TempSmartCardOld}}</span>."},
+			{	"TestStep" : "Left-click on OK button in Confirm Smart Card Pin window.",
+				"Expected" : "Confirm Samrt Card Pin window closes and Smart Card Certificate Enrollment Station status states: \"Please wait while the uer is enrolled.\""},
+			{	"TestStep" : "Wait for Smart Card Certificate Enrollment Station status to state: \"The smart card is ready. Please press 'View Certificate' to make sure the certificate conatins the correct personal information about the user.\"",
+				"Expected" : "Smart Card Certificate Enrollment Station status to state: \"The smart card is ready. Please press 'View Certificate' to make sure the certificate conatins the correct personal information about the user.\""},
+			{	"TestStep" : "Left-click on 'X' in upper-right corner of Confirm Smart Card Pin window.",
+				"Expected" : "Confirm Smart Card Pin window closes."}				
 		],
 		"Settings" : [
 			{	"ID"    : "CertCard1Option-1",
