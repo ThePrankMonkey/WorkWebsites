@@ -141,6 +141,8 @@ data = [
 			{	"TestStep" : "Enter <span class=variable>{{URL}}</span> into the Address field.",
 				"Expected" : "<span class=variable>{{URL}}</span> is entered into the Address field."},
 			{	"TestStep" : "Press Enter key on your keyboard.",
+				"Expected" : "If \"There is a problem with this website's security certificate\", proceed to next step. Otherwise, <span class=variable>{{URL}}</span> page loads and skip the next step."},
+			{	"TestStep" : "Left-click on \"Continue to this website (not recommended).\" link.",
 				"Expected" : "<span class=variable>{{URL}}</span> page loads."}
 		],
 		"Settings" : [
@@ -208,7 +210,8 @@ data = [
 				"Type"     : "select",
 				"Options"  : [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
 				"Text"     : "How many blank lines?",
-				"Value"    : ""}
+				"Value"    : "",
+				"Function" : "/Function(function (entry) { entry.Steps = []; for (var i=0; i<parseInt(entry.Settings[0].Value); i++){ entry.Steps.push({\"TestStep\" : \"\",\"Expected\" : \"\"}) }})/"}
 		]
 	},
 	{
@@ -232,7 +235,7 @@ data = [
 			{	"TestStep" : "Left-click on the password field.",
 				"Expected" : "User password field has focus."},
 			{	"TestStep" : "Enter your admin password into the password field.",
-				"Expected" : "Admin password is entered."},
+				"Expected" : "Admin password is entered."},+
 			{	"TestStep" : "Left-click on Yes button.",
 				"Expected" : "MMC Console window is opened."},
 			{	"TestStep" : "Left-click on File button.",
