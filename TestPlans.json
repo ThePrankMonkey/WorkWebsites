@@ -3,6 +3,7 @@ data = [
 		"ID" : "ADOpen",
 		"Title" : "Active Directory - Opening",
 		"Description" : "This contains the steps necessary for opening Active Directory from scratch using MMC snap ins.",
+		"Requirements" : [],
 		"Steps" : [
 			{	"TestStep" : "Press Windows key on your keyboard",
 				"Expected" : "Start menu opens."},
@@ -51,6 +52,7 @@ data = [
 		"ID" : "ADFind",
 		"Title" : "Active Directory - Finding",
 		"Description" : "This contains the steps to search for your desired ADObject from an already opened Active Directory.",
+		"Requirements" : [],
 		"Steps" : [
 			{	"TestStep" : "Locate Active Directory Users and Computers in open MMC Console window.",
 				"Expected" : "Active Directory Users and Computers is located."},
@@ -92,6 +94,7 @@ data = [
 		"ID" : "ADProperty",
 		"Title" : "Active Directory - Object Property",
 		"Description" : "This contains the steps to find the object property for a previously found ADObject from an already opened Active Directory.",
+		"Requirements" : [],
 		"Steps" : [
 			{	"TestStep" : "Left-click on Account tab.",
 				"Expected" : "<span class=variable>{{ADObject}}</span> property window changes to Account tab."},
@@ -119,6 +122,7 @@ data = [
 		"ID" : "Blank",
 		"Title" : "Blank Lines",
 		"Description" : "This will add the amount of blank lines that you select.",
+		"Requirements" : [],
 		"Steps" : [
 			{	"TestStep" : "",
 				"Expected" : ""}
@@ -135,6 +139,7 @@ data = [
 		"ID" : "AppIE",
 		"Title" : "Application - IE",
 		"Description" : "This contains the steps necessary to open IE and go to a directed page.",
+		"Requirements" : [],
 		"Steps" : [
 			{	"TestStep" : "Press Windows key on your keyboard",
 				"Expected" : "Start menu opens."},
@@ -167,6 +172,7 @@ data = [
 		"ID" : "AppMSTSC",
 		"Title" : "Application - MSTSC",
 		"Description" : "This contains the steps necessary to open and log in with MSTSC.",
+		"Requirements" : [],
 		"Steps" : [
 			{	"TestStep" : "Press Windows key on your keyboard",
 				"Expected" : "Start menu opens."},
@@ -209,6 +215,7 @@ data = [
 		"ID" : "CertOpen",
 		"Title" : "Certificate - Opening",
 		"Description" : "This contains the steps necessary for opening Certificate Manager from scratch using MMC snap ins.",
+		"Requirements" : [],
 		"Steps" : [
 			{	"TestStep" : "Press Windows key on your keyboard",
 				"Expected" : "Start menu opens."},
@@ -254,6 +261,7 @@ data = [
 		"ID" : "CertEnroll",
 		"Title" : "Certificate - Enrollment",
 		"Description" : "This contains the steps necessary for adding an Enrollment Agent certificate from an already opened Certificates Manager. This needs to be done on a 2008 Server or later.",
+		"Requirements" : [],
 		"Steps" : [
 			{	"TestStep" : "Locate Certificates in open MMC Console window.",
 				"Expected" : "Certificates is located."},
@@ -284,10 +292,69 @@ data = [
 		]
 	},
 	{
-		"ID" : "Test",
-		"Title" : "Test",
-		"Description" : "Test",
+		"ID"           : "CertCard1",
+		"Title"        : "Certificate - Smartcard (Old)",
+		"Description"  : "These are the instructions to create a temporary smartcard using an old Gemalto card.",
+		"Requirements" : [	"a physical machine", 
+							"a cleared, unblocked old SmartCard with known pin", 
+							"remote connection into CTERM server", 
+							"an enrollment certificate installed", 
+							"opened Internet Explorer"],
 		"Steps" : [
+			{	"TestStep" : "Under Select a Task, left-click on Request a certificate link.",
+				"Expected" : "Microsoft Certificate Services page advances to Request a Certificate page."},
+			{	"TestStep" : "Left-click on Advanced Certificate Request link.",
+				"Expected" : "Request a Certificate page advances to Advance Certificate Request page."},
+			{	"TestStep" : "Left-click on Request a certificate for a smart card on behalf of another user by using the smart card certificate enrollment station link.",
+				"Expected" : "Advance Certificate Request page advances to SmartCard Certificate Enrollment Station page."},
+			{	"TestStep" : "Left-click on Certificate Template field.",
+				"Expected" : "Certificate Template field is expanded."},
+			{	"TestStep" : "Left-click on ASC Smartcard User.",
+				"Expected" : "Certificate field now evaluates to ASC Smartcard User."},
+			{	"TestStep" : "Left-click on Select User... button.",
+				"Expected" : "Select User window is opened."},
+			{	"TestStep" : "In Select User window, in  Enter the Object Name to Select (examples) field, enter TestData for <span class=variable>{{TestAccount}}</span>.",
+				"Expected" : "<span class=variable>{{TestAccount}}</span> data is entered.",
+				"TestData" : "<span class=testdata>{{TestData1}}</span>"},
+			{	"TestStep" : "Left-click on Check Names button.",
+				"Expected" : "If Multiple Names Found window opens, proceed to next step. Otherwise, skip the next three steps."},
+			{	"TestStep" : "Locate your <span class=variable>{{TestAccount}}</span> account under Matching Names.",
+				"Expected" : "<span class=variable>{{TestAccount}}</span> account is found."},
+			{	"TestStep" : "Left-click on <span class=variable>{{TestAccount}}</span> account.",
+				"Expected" : "<span class=variable>{{TestAccount}}</span> account is selected."},
+			{	"TestStep" : "Left-click on OK button.",
+				"Expected" : "Multiple Names Found window is closed."},
+			{	"TestStep" : "Left-click on OK button.",
+				"Expected" : "Select User window is closed."},
+			{	"TestStep" : "Left-click on Enroll button.",
+				"Expected" : "\"Please insert the user's smart card\" message window appears."},
+			{	"TestStep" : "Insert the <span class=variable>{{TempSmartCardOld}}</span> into your card reader.",
+				"Expected" : "<span class=variable>{{TempSmartCardOld}}</span> is inserted into your smart card reader."},
+			{	"TestStep" : "Left-click on OK button in \"Please insert the user's smart card\" message window.",
+				"Expected" : "\"Please insert the user's smart card\" message window closes."},
+			{	"TestStep" : "Wait for smart card to have it's cert installed.",
+				"Expected" : "Certificate for <span class=variable>{{TestAccount}}</span> is installed."}
+		],
+		"Settings" : [
+			{	"ID"    : "CertCard1Option-1",
+				"Type"  : "text",
+				"Text"  : "Test Data like: \"Domain\\Test.Test\"",
+				"Var"   : "TestData1",
+				"Value" : ""}
+		]
+	},
+	{
+		"ID" : "CertCard2",
+		"Title" : "Certificate - Smartcard (.NET)",
+		"Description" : "These are the instructions to create a temporary smartcard using the new .NET Gemalto card. Requires a physical machine and remoting into Win 7 VDI and an already opened Certificates Manager.",
+		"Requirements" : [],
+		"Steps" : [
+			{	"TestStep" : "Locate Console MMC window.",
+				"Expected" : "Console MMC window is located."},
+			{	"TestStep" : "Locate Personal under Certificates - Current User in Console MMC window.",
+				"Expected" : "Personal is located."},
+			{	"TestStep" : "Left-click on arrow to left of Personal.",
+				"Expected" : "Personal is expanded."},
 			{	"TestStep" : "",
 				"Expected" : ""},
 			{	"TestStep" : "",
@@ -296,7 +363,7 @@ data = [
 				"Expected" : ""}
 		],
 		"Settings" : [
-			{	"ID"    : "TestOption-1",
+			{	"ID"    : "CertCard2Option-1",
 				"Type"  : "text",
 				"Text"  : "Test",
 				"Var"   : "Test",
@@ -307,33 +374,23 @@ data = [
 		"ID" : "Test",
 		"Title" : "Test",
 		"Description" : "Test",
+		"Requirements" : [],
 		"Steps" : [
 			{	"TestStep" : "",
-				"Expected" : ""},
+				"Expected" : "",
+				"TestData" : "",
+				"Actual"   : ["",
+							  ""]},
 			{	"TestStep" : "",
-				"Expected" : ""},
+				"Expected" : "",
+				"TestData" : "",
+				"Actual"   : ["",
+							  ""]},
 			{	"TestStep" : "",
-				"Expected" : ""}
-		],
-		"Settings" : [
-			{	"ID"    : "TestOption-1",
-				"Type"  : "text",
-				"Text"  : "Test",
-				"Var"   : "Test",
-				"Value" : ""}
-		]
-	},
-	{
-		"ID" : "Test",
-		"Title" : "Test",
-		"Description" : "Test",
-		"Steps" : [
-			{	"TestStep" : "",
-				"Expected" : ""},
-			{	"TestStep" : "",
-				"Expected" : ""},
-			{	"TestStep" : "",
-				"Expected" : ""}
+				"Expected" : "",
+				"TestData" : "",
+				"Actual"   : ["",
+							  ""]}
 		],
 		"Settings" : [
 			{	"ID"    : "TestOption-1",
