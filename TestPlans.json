@@ -339,11 +339,11 @@ data = [
 			{	"TestStep" : "Enter the known PIN for <span class=variable>{{TempSmartCardOld}}</span> into the PIN field.",
 				"Expected" : "PIN field contains the known PIN for <span class=variable>{{TempSmartCardOld}}</span>."},
 			{	"TestStep" : "Left-click on OK button in Confirm Smart Card Pin window.",
-				"Expected" : "Confirm Samrt Card Pin window closes and Smart Card Certificate Enrollment Station status states: \"Please wait while the uer is enrolled.\""},
-			{	"TestStep" : "Wait for Smart Card Certificate Enrollment Station status to state: \"The smart card is ready. Please press 'View Certificate' to make sure the certificate conatins the correct personal information about the user.\"",
-				"Expected" : "Smart Card Certificate Enrollment Station status to state: \"The smart card is ready. Please press 'View Certificate' to make sure the certificate conatins the correct personal information about the user.\""},
-			{	"TestStep" : "Left-click on 'X' in upper-right corner of Confirm Smart Card Pin window.",
-				"Expected" : "Confirm Smart Card Pin window closes."}				
+				"Expected" : "Confirm Smart Card Pin window closes and Smart Card Certificate Enrollment Station status states: \"Please wait while the user is enrolled.\""},
+			{	"TestStep" : "Wait for Smart Card Certificate Enrollment Station status to state: \"The smart card is ready. Please press 'View Certificate' to make sure the certificate contains the correct personal information about the user.\"",
+				"Expected" : "Smart Card Certificate Enrollment Station status to state: \"The smart card is ready. Please press 'View Certificate' to make sure the certificate contains the correct personal information about the user.\""},
+			{	"TestStep" : "Left-click on 'X' in upper-right corner of Smart Card Certificate Enrollment Station window.",
+				"Expected" : "Smart Card Certificate Enrollment Station window closes."}				
 		],
 		"Settings" : [
 			{	"ID"    : "CertCard1Option-1",
