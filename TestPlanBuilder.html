@@ -245,30 +245,43 @@
 				headRow.appendChild(headActual)
 				headRow.appendChild(headStatus)
 				headRow.appendChild(headNotes)
+				// Build appliedData object
+				var appliedJSON = JSON.parse(JSON.stringify(currentJSON))
+				// Apply functions in appliedData object
+				for (var i=0; i<currentJSON.length; i++){
+					for (var j=0; j<currentJSON[i].Settings.length; j++){
+						if (currentJSON[i].Settings[j].Function){
+							var settingFunction = eval("(" + currentJSON[i].Settings[j].Function + ")")
+							var results = settingFunction(currentJSON[i])
+							console.log(results)
+							appliedJSON[i] = results
+						}
+					}
+				}
 				// Build rows
 				var step = 1
-				for (var i=0; i<currentJSON.length; i++){
-					for (var j=0; j<currentJSON[i].Steps.length; j++){
+				for (var i=0; i<appliedJSON.length; i++){
+					for (var j=0; j<appliedJSON[i].Steps.length; j++){
 						var newRow = document.createElement("tr")
 							newRow.className = "stepRow"
 						outputTABLE.appendChild(newRow)
 						var stepStep = document.createElement("td")
 							stepStep.innerHTML = step + "."
 						var testStep = document.createElement("td")
-							testStep.innerHTML = currentJSON[i].Steps[j].TestStep
+							testStep.innerHTML = appliedJSON[i].Steps[j].TestStep
 						var actualData = document.createElement("td")
-							if(currentJSON[i].Steps[j].TestData){
-								actualData.innerHTML = currentJSON[i].Steps[j].TestData
+							if(appliedJSON[i].Steps[j].TestData){
+								actualData.innerHTML = appliedJSON[i].Steps[j].TestData
 							}
 						var expectedResults = document.createElement("td")
-							expectedResults.innerHTML = currentJSON[i].Steps[j].Expected
+							expectedResults.innerHTML = appliedJSON[i].Steps[j].Expected
 						var actualResults = document.createElement("td")
 							if(type == "pass"){
-								if(currentJSON[i].Steps[j].Actual){
-									actualResults.innerHTML = currentJSON[i].Steps[j].Actual[Math.floor(Math.random() * currentJSON[i].Steps[j].Actual.length)]
+								if(appliedJSON[i].Steps[j].Actual){
+									actualResults.innerHTML = appliedJSON[i].Steps[j].Actual[Math.floor(Math.random() * appliedJSON[i].Steps[j].Actual.length)]
 								}
 								else{
-									actualResults.innerHTML = currentJSON[i].Steps[j].Expected
+									actualResults.innerHTML = appliedJSON[i].Steps[j].Expected
 								}
 							}
 						var status = document.createElement("td")
