@@ -211,7 +211,7 @@ data = [
 				"Options"  : [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
 				"Text"     : "How many blank lines?",
 				"Value"    : "",
-				"Function" : "/Function(function (entry) { entry.Steps = []; for (var i=0; i<parseInt(entry.Settings[0].Value); i++){ entry.Steps.push({\"TestStep\" : \"\",\"Expected\" : \"\"}) }})/"}
+				"Function" : "function (entry) { tempEntry = JSON.parse(JSON.stringify(entry)); tempEntry.Steps = []; for (var i=0; i<parseInt(tempEntry.Settings[0].Value); i++){ tempEntry.Steps.push({\"TestStep\" : \"\",\"Expected\" : \"\"}) } return tempEntry; }"}
 		]
 	},
 	{
