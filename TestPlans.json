@@ -235,7 +235,7 @@ data = [
 			{	"TestStep" : "Left-click on the password field.",
 				"Expected" : "User password field has focus."},
 			{	"TestStep" : "Enter your admin password into the password field.",
-				"Expected" : "Admin password is entered."},+
+				"Expected" : "Admin password is entered."},
 			{	"TestStep" : "Left-click on Yes button.",
 				"Expected" : "MMC Console window is opened."},
 			{	"TestStep" : "Left-click on File button.",
